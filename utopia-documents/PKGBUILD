@@ -5,7 +5,7 @@
 pkgname=utopia-documents
 pkgver=2.4.2
 pkgrel=1
-pkgdesc="An Powerful PDF reader enables users to view comments through Altmetric"
+pkgdesc="An Powerful PDF reader for scientists enables users to view comments through Altmetric"
 arch=('i686' 'x86_64')
 url='http://utopiadocs.cs.man.ac.uk'
 license=('GPL')
