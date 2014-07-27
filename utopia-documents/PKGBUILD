@@ -1,0 +1,43 @@
+# Contributor: Zhu Jinxuan <zhujinxuan@gmail.com>
+# Maintainer: Zhu Jinxuan <zhujinxuan@gmail.com>
+
+pkgname=utopia-documents
+pkgver=2.4.2
+pkgdesc=''
+pkgrel=1
+arch=('i686' 'x86_64')
+url='http://utopiadocs.cs.man.ac.uk'
+license=('GPL')
+depends=('libqglviewer-qt4')
+makedepends=('')
+# optdepends=('')
+# provides=('')
+# conflicts=('')
+# install=utopia-documents.install
+source=("http://utopiadocs.cs.man.ac.uk/files/${pkgname}-${pkgver}.zip")
+md5sums=('df3488799f7e914af3d8ff369bf7a286')
+
+build() {
+  # unzip "${pkgname}-${pkgver}".zip
+  cd "${pkgname}-${pkgver}"
+  export CMAKE_INSTALL_PREFIX=$pkgdir/usr
+  ./configure --prefix=$pkgdir/usr  --builddir build/Linux-Debug --deps dependencies --release
+
+  cd build/Linux-Debug
+  cp CMakeCache.txt CMakeCache.txt.1
+  sed -i 's|CMAKE_INSTALL_PREFIX:PATH=\/usr|CMAKE_INSTALL_PREFIX:PATH=XXXX|g' CMakeCache.txt.1
+  sed -i "s|XXXX|$CMAKE_INSTALL_PREFIX|g"  CMakeCache.txt.1
+  cp CMakeCache.txt.1 CMakeCache.txt
+  make 
+}
+
+package() {
+  cd "${pkgname}-${pkgver}"
+  cd build/Linux-Debug
+  export CMAKE_INSTALL_PREFIX=$pkgdir/usr
+  # cp CMakeCache.txt CMakeCache.txt.1
+  # sed -i 's|CMAKE_INSTALL_PREFIX:PATH=\/usr|CMAKE_INSTALL_PREFIX:PATH=XXXX|g' CMakeCache.txt.1
+  # sed -i "s|XXXX|$CMAKE_INSTALL_PREFIX"  CMakeCache.txt.1
+  # cp CMakeCache.txt.1 CMakeCache.txt
+  make CMAKE_INSTALL_PREFIX=$pkgdir/usr install 
+} 
