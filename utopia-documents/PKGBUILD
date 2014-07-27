@@ -3,25 +3,31 @@
 
 pkgname=utopia-documents
 pkgver=2.4.2
-pkgdesc=''
 pkgrel=1
+pkgdesc="An Powerful PDF reader enables users to view comments through Altmetric"
 arch=('i686' 'x86_64')
 url='http://utopiadocs.cs.man.ac.uk'
 license=('GPL')
 depends=('libqglviewer-qt4' 'python2' 'boost-libs' 'pcre')
-makedepends=('')
-# optdepends=('')
+makedepends=()
+optdepends=()
 provides=('utopia-documents')
-# conflicts=('')
-# install=utopia-documents.install
-source=("http://utopiadocs.cs.man.ac.uk/files/${pkgname}-${pkgver}.zip")
-md5sums=('df3488799f7e914af3d8ff369bf7a286')
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=("http://utopiadocs.cs.man.ac.uk/files/${pkgname}-${pkgver}.zip" "configure.patch")
+sha256sums=('ff673b15d8963ef5b69b49db0add46cfb3efcc633977f91af7c58b72a0241316' '4c2b62839d22e26ee8e069416b30d8c2dde35ec72fc8b3e8851df2a763495b43')
 
 build() {
   # unzip "${pkgname}-${pkgver}".zip
   cd "${pkgname}-${pkgver}"
-  ./configure --builddir build/Linux-Debug --deps dependencies --release
-  cd build/Linux-Debug
+  cp ../configure.patch ./
+  patch configure configure.patch
+  ./configure --release
+  cd build/Linux-Release
   cp CMakeCache.txt CMakeCache.txt.1
   sed -i 's|CMAKE_INSTALL_PREFIX:PATH=\/usr|CMAKE_INSTALL_PREFIX:PATH=XXXX|g' CMakeCache.txt.1
   sed -i "s|XXXX|$pkgdir/usr|g"  CMakeCache.txt.1
@@ -32,5 +38,5 @@ build() {
 package() {
   cd "${pkgname}-${pkgver}"
   cd build/Linux-Debug
-  make CMAKE_INSTALL_PREFIX=$pkgdir/usr install 
+  make install 
 } 
