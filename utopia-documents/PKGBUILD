@@ -11,7 +11,7 @@ license=('GPL')
 depends=('libqglviewer-qt4')
 makedepends=('')
 # optdepends=('')
-# provides=('')
+provides=('utopia-documents')
 # conflicts=('')
 # install=utopia-documents.install
 source=("http://utopiadocs.cs.man.ac.uk/files/${pkgname}-${pkgver}.zip")
@@ -35,9 +35,5 @@ package() {
   cd "${pkgname}-${pkgver}"
   cd build/Linux-Debug
   export CMAKE_INSTALL_PREFIX=$pkgdir/usr
-  # cp CMakeCache.txt CMakeCache.txt.1
-  # sed -i 's|CMAKE_INSTALL_PREFIX:PATH=\/usr|CMAKE_INSTALL_PREFIX:PATH=XXXX|g' CMakeCache.txt.1
-  # sed -i "s|XXXX|$CMAKE_INSTALL_PREFIX"  CMakeCache.txt.1
-  # cp CMakeCache.txt.1 CMakeCache.txt
   make CMAKE_INSTALL_PREFIX=$pkgdir/usr install 
 } 
