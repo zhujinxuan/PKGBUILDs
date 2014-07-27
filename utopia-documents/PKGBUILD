@@ -37,6 +37,6 @@ build() {
 
 package() {
   cd "${pkgname}-${pkgver}"
-  cd build/Linux-Debug
+  cd build/Linux-Release
   make install 
 } 
