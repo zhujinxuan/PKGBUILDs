@@ -11,7 +11,10 @@ url='http://utopiadocs.cs.man.ac.uk'
 license=('GPL')
 depends=('libqglviewer-qt4' 'python2' 'boost' 'boost-libs' 'pcre' 'ttf-ms-fonts')
 makedepends=( 'raptor1' 'swig')
-optdepends=()
+optdepends=('python2-pillow'
+            'python2-lxml'
+            'python2-cssselect'
+            'python2-suds')
 provides=('utopia-documents')
 conflicts=()
 replaces=()
