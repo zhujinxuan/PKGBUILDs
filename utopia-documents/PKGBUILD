@@ -5,11 +5,11 @@
 pkgname=utopia-documents
 pkgver=2.4.2
 pkgrel=1
-pkgdesc="An Powerful PDF reader for scientists enables users to view comments through Altmetric"
+pkgdesc="PDF reader that displays interactive annotations on scientific articles. "
 arch=('i686' 'x86_64')
 url='http://utopiadocs.cs.man.ac.uk'
 license=('GPL')
-depends=('libqglviewer-qt4' 'python2' 'boost' 'boost-libs' 'pcre')
+depends=('libqglviewer-qt4' 'python2' 'boost' 'boost-libs' 'pcre' 'ttf-ms-fonts')
 makedepends=( 'raptor1' 'swig')
 optdepends=()
 provides=('utopia-documents')
