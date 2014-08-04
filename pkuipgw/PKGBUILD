@@ -1,0 +1,39 @@
+# Contributor: Zhu Jinxuan <zhujinxuan@gmail.com>
+# Maintainer: Zhu Jinxuan <zhujinxuan@gmail.com>
+# This PKGBUILD is also available in https://github.com/zhujinxuan/PKGBUILDs
+
+pkgname=pkuipgw
+pkgver=0.3.1
+pkgrel=1
+pkgdesc="PKU ipgw"
+arch=('i686' 'x86_64')
+url='http://linux.bdwm.net/'
+license=('GPL')
+depends=('python2')
+makedepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=("http://attach3.bdwm.net/attach/boards/Linux/M.1403527713.A/pkuipgw%2d${pkgver}.tar.xz")
+sha256sums=('SKIP')
+
+build() {
+  cd "${pkgname}"
+  cp install.sh install.sh1
+  sed -i 's|/usr|XXXX/usr|g' install.sh1
+  sed -i 's|/etc|XXXX/etc|g' install.sh1
+  sed -i "s|XXXX|$pkgdir|g"  install.sh1
+  cp install.sh1 install.sh
+}
+
+package() {
+  cd "${pkgname}"
+  mkdir $pkgdir/usr/bin -p
+  mkdir $pkgdir/etc 
+  ./install.sh
+} 
