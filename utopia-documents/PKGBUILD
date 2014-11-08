@@ -9,7 +9,7 @@ pkgdesc="PDF reader that displays interactive annotations on scientific articles
 arch=('i686' 'x86_64')
 url='http://utopiadocs.cs.man.ac.uk'
 license=('GPL')
-depends=('libqglviewer-qt4' 'python2' 'boost' 'boost-libs' 'pcre' 'ttf-ms-fonts' 'qt4'
+depends=('libqglviewer-qt4' 'python2' 'boost' 'boost-libs' 'pcre' 'ttf-ms-fonts' 'qt4' 'qjson'
           'python2-pillow'
           'python2-lxml'
           'python2-cssselect'
@@ -23,8 +23,12 @@ backup=()
 options=()
 install=
 changelog=
-source=("http://utopiadocs.cs.man.ac.uk/files/${pkgname}-${pkgver}.zip" "configure.patch" "GlobalParams.cc.patch")
-sha256sums=('ff673b15d8963ef5b69b49db0add46cfb3efcc633977f91af7c58b72a0241316' '4c2b62839d22e26ee8e069416b30d8c2dde35ec72fc8b3e8851df2a763495b43' 'b0cfa242c63e192e1099e83ea8e23430469bb8d9bb2a07f3ca3d336c78b8dcca')
+source=("http://utopiadocs.cs.man.ac.uk/files/${pkgname}-${pkgver}.zip" "configure.patch" "GlobalParams.cc.patch" "utopia-documents.sh" "utopia-documents.bash" "utopia-documents.zsh")
+sha256sums=('ff673b15d8963ef5b69b49db0add46cfb3efcc633977f91af7c58b72a0241316' '4c2b62839d22e26ee8e069416b30d8c2dde35ec72fc8b3e8851df2a763495b43' 'b0cfa242c63e192e1099e83ea8e23430469bb8d9bb2a07f3ca3d336c78b8dcca'
+          '9e4c9f9aee0b3bfa9625989f3de4de5032f7b656b5f6f050d206d1541e30d41a'
+          '64524d3a3be66f403db44ef40772717aff38445e0e4208c15ac166fe2fcfad0a'
+          '64524d3a3be66f403db44ef40772717aff38445e0e4208c15ac166fe2fcfad0a'
+)
 
 build() {
   # unzip "${pkgname}-${pkgver}".zip
@@ -43,7 +47,11 @@ build() {
 }
 
 package() {
+  install utopia-documents.bash --target-directory=${pkgdir}/etc/profile.d/
+  install utopia-documents.sh --target-directory=${pkgdir}/etc/profile.d/
+  install utopia-documents.zsh --target-directory=${pkgdir}/etc/profile.d/
   cd "${pkgname}-${pkgver}"
   cd build/Linux-Release
   make install 
+  
 } 
